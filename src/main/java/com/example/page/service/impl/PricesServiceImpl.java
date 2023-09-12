@@ -5,12 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.page.dto.PricesDTO;
-import com.example.page.entity.Prices;
+import com.example.page.dto.PriceDTO;
+import com.example.page.entity.PriceEntity;
 import com.example.page.repository.PricesRepository;
 import com.example.page.service.PricesService;
 
@@ -28,20 +27,25 @@ public class PricesServiceImpl implements PricesService {
 	ModelMapper modelMapper;
 	
 	@Override
-	public List<PricesDTO> getPricesByDateAndProductIdAndBrandId(Date applicationDate, Integer productId, Integer brandId) {
+	public PriceDTO getPricesByDateAndProductIdAndBrandId(Date applicationDate, Integer productId, Integer brandId) {
 
-		List<Prices> pricesEntityList = pricesRepository.findByProductIdAndBrandIdAndStartDateBeforeAndEndDateAfterOrderByPriorityDesc(productId, brandId, applicationDate, applicationDate);
+		PriceDTO priceDto = null;
 		
-		List<PricesDTO> pricesDtoList = new ArrayList<>();
-		pricesEntityList.stream().forEach(priceEntity -> pricesDtoList.add(modelMapper.map(priceEntity, PricesDTO.class)));
-		
-		return pricesDtoList;
+		List<PriceEntity> pricesEntityList = pricesRepository.findByDateAndProductIdAndBrandId(applicationDate, productId, brandId);
+	
+		if(pricesEntityList != null && !pricesEntityList.isEmpty()) {
+			priceDto = modelMapper.map(pricesEntityList.get(0), PriceDTO.class);
+		}		
+		return priceDto;
 	}
 
 	@Override
-	public List<PricesDTO> getAll(){
-		List<Prices> allPricesEntity = pricesRepository.findAll();
-		
-		return modelMapper.map(allPricesEntity, new TypeToken<List<PricesDTO>>(){}.getType());
+	public List<PriceDTO> getAll(){
+		List<PriceDTO> listDto = new ArrayList<>();
+		List<PriceEntity> allPricesEntity = pricesRepository.findAll();
+		if (allPricesEntity != null && !allPricesEntity.isEmpty()) {
+			allPricesEntity.stream().forEach(p -> listDto.add(modelMapper.map(p, PriceDTO.class)));
+		}
+		return listDto;
 	}
 }

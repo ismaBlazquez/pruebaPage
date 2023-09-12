@@ -3,11 +3,11 @@ package com.example.page.service;
 import java.util.Date;
 import java.util.List;
 
-import com.example.page.dto.PricesDTO;
+import com.example.page.dto.PriceDTO;
 
 public interface PricesService {
 
-	List<PricesDTO> getPricesByDateAndProductIdAndBrandId(Date applicationDate, Integer productId, Integer brandId);
+	PriceDTO getPricesByDateAndProductIdAndBrandId(Date applicationDate, Integer productId, Integer brandId);
 	
-	List<PricesDTO> getAll();
+	List<PriceDTO> getAll();
 }

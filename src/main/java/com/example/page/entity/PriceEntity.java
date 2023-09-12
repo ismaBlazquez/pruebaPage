@@ -1,28 +1,45 @@
-package com.example.page.dto;
+package com.example.page.entity;
 
 import java.util.Date;
 
-public class PricesDTO {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "PRICES")
+public class PriceEntity {
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(name = "BRAND_ID")
 	private Integer brandId;
 	
+	@Column(name = "START_DATE")
 	private Date startDate;
 	
+	@Column(name = "END_DATE")
 	private Date endDate;
 	
+	@Column(name = "PRICE_LIST")
 	private Integer priceList;
 	
+	@Column(name = "PRODUCT_ID")
 	private Integer productId;
 	
+	@Column(name = "PRIORITY")
 	private Integer priority;
 	
+	@Column(name = "PRICE")
 	private Double price;
 	
+	@Column(name = "CURR")
 	private String curr;
-
-	
 
 	public Integer getId() {
 		return id;
@@ -95,38 +112,6 @@ public class PricesDTO {
 	public void setCurr(String curr) {
 		this.curr = curr;
 	}
-
-	public PricesDTO(Integer id, Integer brand_id, Date start_date, Date end_date, Integer price_list,
-			Integer product_id, Integer priority, Double price, String curr) {
-		this.id = id;
-		this.brandId = brand_id;
-		this.startDate = start_date;
-		this.endDate = end_date;
-		this.priceList = price_list;
-		this.productId = product_id;
-		this.priority = priority;
-		this.price = price;
-		this.curr = curr;
-	}
-	
-	
-	
-	public PricesDTO() {
-		super();
-	}
-
-	public String toCustomString() {
-		return "product_id: " + this.productId + ", brand_id: " + brandId + ", price_list: " + priceList
-				+ ", start_date: " + startDate + ", end_date: " + endDate + ", price: " + price;
-	}
-
-	@Override
-	public String toString() {
-		return "PricesDTO [id=" + id + ", brandId=" + brandId + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", priceList=" + priceList + ", productId=" + productId + ", priority=" + priority + ", price="
-				+ price + ", curr=" + curr + "]";
-	}
-	
 	
 	
 }
