@@ -3,6 +3,7 @@ package com.example.page.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,23 +35,20 @@ public class PricesController {
 	public @ResponseBody List<PricesDTO> getPricesByDateAndProductIdAndBrandId(
 			@RequestParam String applicationDate, @RequestParam Integer productId, @RequestParam Integer brandId) {
 		
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		List<PricesDTO> pricesList = new ArrayList<>();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-ddTHH:MM:ss");
 		Date appDate = null;
 		try {
 			appDate = df.parse(applicationDate);
+			pricesList = pricesService.getPricesByDateAndProductIdAndBrandId(appDate, productId, brandId);
 		} catch (ParseException e) {
-			return HttpStatus.BAD_REQUEST;
+			return pricesList;
 		}
-		
-		List<PricesDTO> pricesList = pricesService.getPricesByDateAndProductIdAndBrandId(appnDate, productId, brandId);
-		return pricesList;
-		//HttpStatus.
-		
+		return pricesList;		
 	}
 	
 	@GetMapping("/getAll")
 	public @ResponseBody List<PricesDTO> getPricesByDateAndProductIdAndBrandId() {
-		
 		List<PricesDTO> all = pricesService.getAll();	
 		return all;
 	}

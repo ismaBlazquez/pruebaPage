@@ -24,7 +24,6 @@ public class PricesServiceImpl implements PricesService {
         this.pricesRepository = pricesRepository;
     }
 
-	
 	@Autowired
 	ModelMapper modelMapper;
 	
