@@ -17,28 +17,28 @@ public class Prices {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column
+	@Column(name = "BRAND_ID")
 	private Integer brandId;
 	
-	@Column
+	@Column(name = "START_DATE")
 	private Date startDate;
 	
-	@Column
+	@Column(name = "END_DATE")
 	private Date endDate;
 	
-	@Column
+	@Column(name = "PRICE_LIST")
 	private Integer priceList;
 	
-	@Column
+	@Column(name = "PRODUCT_ID")
 	private Integer productId;
 	
-	@Column
+	@Column(name = "PRIORITY")
 	private Integer priority;
 	
-	@Column
+	@Column(name = "PRICE")
 	private Double price;
 	
-	@Column
+	@Column(name = "CURR")
 	private String curr;
 
 	public Integer getId() {

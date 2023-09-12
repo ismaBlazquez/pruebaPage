@@ -109,6 +109,12 @@ public class PricesDTO {
 		this.curr = curr;
 	}
 	
+	
+	
+	public PricesDTO() {
+		super();
+	}
+
 	public String toCustomString() {
 		return "product_id: " + this.productId + ", brand_id: " + brandId + ", price_list: " + priceList
 				+ ", start_date: " + startDate + ", end_date: " + endDate + ", price: " + price;
